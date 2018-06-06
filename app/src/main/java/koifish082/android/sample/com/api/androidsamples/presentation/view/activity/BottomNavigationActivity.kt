@@ -5,6 +5,7 @@ import android.support.design.widget.BottomNavigationView
 import koifish082.android.sample.com.api.androidsamples.R
 import koifish082.android.sample.com.api.androidsamples.presentation.view.fragment.BaseFragment
 import koifish082.android.sample.com.api.androidsamples.presentation.view.fragment.HomeFragment
+import kotlinx.android.synthetic.main.activity_bottom_navigation.*
 
 class BottomNavigationActivity : BaseActivity() {
 
@@ -28,8 +29,8 @@ class BottomNavigationActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        setContentView(R.layout.activity_bottom_navigation)
+        bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
     }
 
     private fun inflateFragment(fragmentInstance: BaseFragment) {

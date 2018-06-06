@@ -3,6 +3,7 @@ package koifish082.android.sample.com.api.androidsamples.presentation
 import android.app.Application
 import android.content.Context
 import timber.log.Timber
+import koifish082.android.sample.com.api.androidsamples.BuildConfig
 
 class BaseApplication : Application() {
 
@@ -28,6 +29,5 @@ class BaseApplication : Application() {
             Timber.plant(Timber.DebugTree())
         }
     }
-
 
 }
