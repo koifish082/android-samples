@@ -17,10 +17,7 @@ class BottomNavigationActivity : BaseActivity() {
                 inflateFragment(HomeFragment())
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_dashboard -> {
-                return@OnNavigationItemSelectedListener true
-            }
-            R.id.navigation_notifications -> {
+            R.id.navigation_my_page -> {
                 return@OnNavigationItemSelectedListener true
             }
         }
