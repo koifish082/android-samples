@@ -1,4 +1,11 @@
 package koifish082.android.sample.com.api.androidsamples.domain.usecase
 
-class BaseUseCase {
+import io.reactivex.disposables.CompositeDisposable
+
+abstract class BaseUseCase {
+
+    abstract fun execute()
+
+    protected val disposables = CompositeDisposable()
+
 }

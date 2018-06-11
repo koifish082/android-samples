@@ -1,6 +1,6 @@
 package koifish082.android.sample.com.api.androidsamples.data.entity.githubApi.request
 
-class GitHubRepositoryRequest : BaseRequest() {
+class RepositorySearchRequest : BaseRequest() {
 
     companion object {
 
