@@ -1,4 +1,4 @@
-package koifish082.android.sample.com.api.androidsamples.domain.usecase
+package koifish082.android.sample.com.api.androidsamples.domain.interactor
 
 import io.reactivex.disposables.CompositeDisposable
 

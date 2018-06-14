@@ -4,8 +4,7 @@ import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import koifish082.android.sample.com.api.androidsamples.R
 import koifish082.android.sample.com.api.androidsamples.presentation.view.fragment.BaseFragment
-import koifish082.android.sample.com.api.androidsamples.presentation.view.fragment.HomeFragment
-import kotlinx.android.synthetic.main.activity_bottom_navigation.*
+import koifish082.android.sample.com.api.androidsamples.presentation.view.fragment.SearchRepositoryFragment
 
 class BottomNavigationActivity : BaseActivity() {
 
@@ -14,7 +13,7 @@ class BottomNavigationActivity : BaseActivity() {
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
-                inflateFragment(HomeFragment())
+                inflateFragment(SearchRepositoryFragment())
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_my_page -> {

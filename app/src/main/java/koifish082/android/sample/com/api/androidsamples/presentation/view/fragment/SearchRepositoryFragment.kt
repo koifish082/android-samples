@@ -9,11 +9,11 @@ import koifish082.android.sample.com.api.androidsamples.R
 /**
  * A fragment representing a list of Items.
  * Activities containing this fragment MUST implement the
- * [HomeFragment.OnListFragmentInteractionListener] interface.
+ * [SearchRepositoryFragment.OnListFragmentInteractionListener] interface.
  */
-class HomeFragment : BaseFragment() {
+class SearchRepositoryFragment : BaseFragment() {
 
-    override val TAG = HomeFragment::class.java.simpleName
+    override val TAG = SearchRepositoryFragment::class.java.simpleName
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
