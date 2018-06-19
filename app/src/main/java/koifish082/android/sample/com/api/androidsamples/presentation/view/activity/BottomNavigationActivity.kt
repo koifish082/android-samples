@@ -5,6 +5,7 @@ import android.support.design.widget.BottomNavigationView
 import koifish082.android.sample.com.api.androidsamples.R
 import koifish082.android.sample.com.api.androidsamples.presentation.view.fragment.BaseFragment
 import koifish082.android.sample.com.api.androidsamples.presentation.view.fragment.SearchRepositoryFragment
+import kotlinx.android.synthetic.main.activity_bottom_navigation.*
 
 class BottomNavigationActivity : BaseActivity() {
 

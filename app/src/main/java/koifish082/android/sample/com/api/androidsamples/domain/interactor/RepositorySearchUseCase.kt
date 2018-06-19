@@ -30,15 +30,13 @@ class RepositorySearchUseCase(private val searchCondition: RepositorySearchViewM
     }
 
     private inner class GetRepositoriesObserver : DisposableSingleObserver<Repositories>() {
-
         override fun onSuccess(response: Repositories) {
-//            Timber.d("onSuccess in rxjava observer")
+            Timber.d("onSuccess in rxjava observer")
         }
 
         override fun onError(e: Throwable) {
-//            Timber.d("onError in rxjava observer")
+            Timber.d("onError in rxjava observer")
         }
-
     }
 
     fun dispose() {
