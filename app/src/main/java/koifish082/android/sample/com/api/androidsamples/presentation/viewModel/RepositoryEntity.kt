@@ -1,13 +1,14 @@
 package koifish082.android.sample.com.api.androidsamples.presentation.viewModel
 
-class RepostoryList {
-    var userName: String = ""
+class RepositoryEntity {
 
-    var repositoryName: String = ""
+    var ownerName: String = ""
 
-    var repositoryDescription: String = ""
+    var name: String = ""
 
-    var lanugage: String = ""
+    var description: String = ""
+
+    var language: String = ""
 
     var stargazersCount: Int = 0
 

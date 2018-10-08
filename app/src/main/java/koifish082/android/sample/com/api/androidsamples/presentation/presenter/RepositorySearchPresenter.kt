@@ -1,4 +1,8 @@
 package koifish082.android.sample.com.api.androidsamples.presentation.presenter
 
-interface RepositorySearchPresenter {
+import koifish082.android.sample.com.api.androidsamples.presentation.view.fragment.SearchRepositoryFragment
+
+interface RepositorySearchPresenter : BasePresenter {
+    var viewSearchRepositoryView : SearchRepositoryFragment
+    fun getRepositoryList()
 }
