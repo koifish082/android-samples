@@ -1,4 +1,4 @@
-package koifish082.android.sample.com.api.androidsamples.presentation.presenter
+package koifish082.android.sample.com.api.androidsamples.presentation.presenter.Impl
 
 abstract class BasePresenter {
     /**
