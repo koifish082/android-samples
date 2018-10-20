@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import koifish082.android.sample.com.api.androidsamples.R
 import koifish082.android.sample.com.api.androidsamples.presentation.di.component.DaggerRepositoryComponent
-import koifish082.android.sample.com.api.androidsamples.presentation.di.component.RepositoryComponent
 import koifish082.android.sample.com.api.androidsamples.presentation.di.module.RepositoryModule
+import koifish082.android.sample.com.api.androidsamples.presentation.presenter.Impl.RepositorySearchPresenterImpl
 import koifish082.android.sample.com.api.androidsamples.presentation.presenter.RepositorySearchPresenter
 import javax.inject.Inject
 
@@ -16,7 +16,6 @@ import javax.inject.Inject
  * Activities containing this fragment MUST implement the
  * [SearchRepositoryFragment.OnListFragmentInteractionListener] interface.
  */
-
 class SearchRepositoryFragment : BaseFragment() {
 
     override val TAG = SearchRepositoryFragment::class.java.simpleName

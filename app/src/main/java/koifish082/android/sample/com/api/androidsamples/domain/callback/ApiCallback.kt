@@ -4,6 +4,6 @@ interface ApiCallback<T> {
 
     fun onSuccess(result: T)
 
-    fun onError(error: Error)
+    fun onError(e: Throwable)
 
 }

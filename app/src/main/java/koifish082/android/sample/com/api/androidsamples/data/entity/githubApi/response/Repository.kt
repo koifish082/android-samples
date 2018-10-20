@@ -7,7 +7,7 @@ data class Repository(
     @SerializedName("node_id") val nodeId: String,
     @SerializedName("name") val name: String,
     @SerializedName("full_name") var fullName: String,
-    @SerializedName("owner") var owner: List<User>,
+    @SerializedName("owner") var owner: User,
     @SerializedName("private") var private: Boolean,
     @SerializedName("html_url") var htmlUrl: String,
     @SerializedName("description") var description: String,
