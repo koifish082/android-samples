@@ -8,7 +8,7 @@ class RepositoryEntity {
 
     var description: String = ""
 
-    var language: String = ""
+    var language: String? = ""
 
     var stargazersCount: Int = 0
 

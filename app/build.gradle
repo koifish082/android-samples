@@ -48,6 +48,7 @@ android {
         prod {
             applicationIdSuffix ".prod"
             signingConfig signingConfigs.prod
+//            buildConfigField "String", "BASE_URL", encloseDoubleQuote(apiBaseUrl)
         }
         dev {
             applicationIdSuffix ".dev"

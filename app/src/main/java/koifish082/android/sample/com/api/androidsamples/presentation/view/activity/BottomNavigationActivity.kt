@@ -28,6 +28,7 @@ class BottomNavigationActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bottom_navigation)
         bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        inflateFragment(SearchRepositoryFragment())
     }
 
     private fun inflateFragment(fragmentInstance: BaseFragment) {

@@ -1,11 +1,12 @@
 package koifish082.android.sample.com.api.androidsamples.presentation.presenter.Impl
 
-import koifish082.android.sample.com.api.androidsamples.domain.callback.ApiCallback
+import io.reactivex.observers.DisposableSingleObserver
+import koifish082.android.sample.com.api.androidsamples.data.entity.githubApi.response.Repositories
 import koifish082.android.sample.com.api.androidsamples.domain.interactor.RepositorySearchUseCase
 import koifish082.android.sample.com.api.androidsamples.presentation.presenter.RepositorySearchPresenter
 import koifish082.android.sample.com.api.androidsamples.presentation.view.fragment.SearchRepositoryFragment
-import koifish082.android.sample.com.api.androidsamples.presentation.viewModel.RepositoryListEntity
 import koifish082.android.sample.com.api.androidsamples.presentation.viewModel.RepositorySearchViewModel
+import koifish082.android.sample.com.api.androidsamples.presentation.viewModel.mapper.RepositoryEntityMapper
 import timber.log.Timber
 
 class RepositorySearchPresenterImpl : RepositorySearchPresenter {
@@ -17,21 +18,26 @@ class RepositorySearchPresenterImpl : RepositorySearchPresenter {
     }
 
     private val repositorySearchUseCase: RepositorySearchUseCase by lazy {
-        RepositorySearchUseCase(searchCondition, callback)
+        RepositorySearchUseCase(searchCondition, GetRepositoriesObserver())
+    }
+
+    private val repositoryEntityMapper: RepositoryEntityMapper by lazy {
+        RepositoryEntityMapper()
     }
 
     override fun getRepositoryList() {
         repositorySearchUseCase.execute()
     }
 
-    private val callback = object : ApiCallback<RepositoryListEntity> {
-        override fun onSuccess(repositories: RepositoryListEntity) {
-//            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            Timber.d("*********** Success in presenter ********* ");
+    private inner class GetRepositoriesObserver : DisposableSingleObserver<Repositories>() {
+        override fun onSuccess(response: Repositories) {
+            Timber.d("*************** onSuccess in rxjava observer")
+            viewSearchRepositoryView.showSearchResult(repositoryEntityMapper.mapResponseToViewModel(response))
         }
+
         override fun onError(e: Throwable) {
-//            TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-            Timber.d("*********** Error in presenter ********* ");
+            Timber.d("*************** onError in rxjava observer")
+            Timber.d(e)
         }
     }
 

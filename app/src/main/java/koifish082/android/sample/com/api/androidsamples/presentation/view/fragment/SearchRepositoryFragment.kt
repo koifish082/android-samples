@@ -9,6 +9,8 @@ import koifish082.android.sample.com.api.androidsamples.presentation.di.componen
 import koifish082.android.sample.com.api.androidsamples.presentation.di.module.RepositoryModule
 import koifish082.android.sample.com.api.androidsamples.presentation.presenter.Impl.RepositorySearchPresenterImpl
 import koifish082.android.sample.com.api.androidsamples.presentation.presenter.RepositorySearchPresenter
+import koifish082.android.sample.com.api.androidsamples.presentation.viewModel.RepositoryEntity
+import koifish082.android.sample.com.api.androidsamples.presentation.viewModel.RepositoryListEntity
 import javax.inject.Inject
 
 /**
@@ -50,4 +52,7 @@ class SearchRepositoryFragment : BaseFragment() {
                 .inject(this)
     }
 
+    fun showSearchResult(repositoryList: RepositoryListEntity) {
+        // set repositories to recycler view adapter
+    }
 }
