@@ -1,4 +1,4 @@
-package koifish082.android.sample.com.api.androidsamples
+package com.koifish082.android.samples
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getTargetContext()
-        assertEquals("koifish082.android.sample.com.api.androidsamples", appContext.packageName)
+        assertEquals("com.koifish082.android.samples", appContext.packageName)
     }
 }

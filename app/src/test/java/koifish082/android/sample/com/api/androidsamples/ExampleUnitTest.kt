@@ -1,4 +1,4 @@
-package koifish082.android.sample.com.api.androidsamples
+package com.koifish082.android.samples
 
 import org.junit.Test
 

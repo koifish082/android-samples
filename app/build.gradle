@@ -9,7 +9,7 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "koifish082.android.sample.com.api.androidsamples"
+        applicationId "com.koifish082.android.samples"
         minSdkVersion 19
         targetSdkVersion 27
         versionCode 1
@@ -45,14 +45,16 @@ android {
 
     flavorDimensions "tier"
     productFlavors {
+        def encloseDoubleQuote = { str -> '"' + str + '"' }
         prod {
             applicationIdSuffix ".prod"
             signingConfig signingConfigs.prod
-//            buildConfigField "String", "BASE_URL", encloseDoubleQuote(apiBaseUrl)
+            buildConfigField "String", 'GITHUB_API_BASE_URL', encloseDoubleQuote("https://api.github.com/")
         }
         dev {
             applicationIdSuffix ".dev"
             signingConfig signingConfigs.dev
+            buildConfigField "String", 'GITHUB_API_BASE_URL', encloseDoubleQuote("https://api.github.com/")
         }
     }
 }
