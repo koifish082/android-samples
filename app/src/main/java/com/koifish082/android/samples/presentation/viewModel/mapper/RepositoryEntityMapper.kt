@@ -11,6 +11,7 @@ class RepositoryEntityMapper {
         repositoryListEntity.totalCount = response.totalCount
         for (repository: Repository in response.items) {
             val repositoryEntity = RepositoryEntity()
+            repositoryEntity.id = repository.id
             repositoryEntity.ownerName = repository.owner.login
             repositoryEntity.name = repository.name
             repositoryEntity.language = repository.language
