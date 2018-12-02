@@ -38,7 +38,7 @@ class RepositoryAdapter(
 
     override fun onBindViewHolder(holder: RepositoryViewHolder, position: Int) {
         holder.bind(getItem(position))
-        holder.itemView.setOnClickListener(onItemClickListener)
+//        holder.itemView.setOnClickListener(onItemClickListener)
     }
 
     private fun getItem(position: Int): RepositoryEntity = repositoryList.repositoryList[position]

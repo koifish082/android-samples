@@ -1,18 +1,20 @@
 package com.koifish082.android.samples.presentation
 
-import android.app.Application
 import android.content.Context
 import timber.log.Timber
 import com.koifish082.android.samples.BuildConfig
+import com.koifish082.android.samples.presentation.di.component.DaggerAppComponent
+import dagger.android.AndroidInjector
+import dagger.android.support.DaggerApplication
 
-class BaseApplication : Application() {
+class MyApplication : DaggerApplication() {
 
     init {
         instance = this
     }
 
     companion object {
-        private var instance: BaseApplication? = null
+        private var instance: MyApplication? = null
 
         fun applicationContext() : Context {
             return instance!!.applicationContext
@@ -28,6 +30,10 @@ class BaseApplication : Application() {
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
         }
+    }
+
+    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
+        return DaggerAppComponent.builder().application(this).build()
     }
 
 }

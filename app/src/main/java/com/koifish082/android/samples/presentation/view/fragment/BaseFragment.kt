@@ -1,8 +1,8 @@
 package com.koifish082.android.samples.presentation.view.fragment
 
-import android.support.v4.app.Fragment
+import dagger.android.support.DaggerFragment
 
-abstract class BaseFragment : Fragment() {
+abstract class BaseFragment : DaggerFragment() {
 
     abstract val TAG: String
 
