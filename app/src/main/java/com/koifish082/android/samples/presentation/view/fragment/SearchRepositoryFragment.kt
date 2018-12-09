@@ -6,7 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import com.koifish082.android.samples.R
 import com.koifish082.android.samples.presentation.presenter.RepositorySearchPresenter
+import com.koifish082.android.samples.presentation.view.adapter.RepositoryAdapter
+import com.koifish082.android.samples.presentation.view.adapter.RepositoryLayoutManager
+import com.koifish082.android.samples.presentation.viewModel.RepositoryEntity
 import com.koifish082.android.samples.presentation.viewModel.RepositoryListEntity
+import kotlinx.android.synthetic.main.fragment_home.view.*
+import timber.log.Timber
 import javax.inject.Inject
 
 /**
@@ -21,6 +26,10 @@ class SearchRepositoryFragment : BaseFragment() {
     @Inject
     lateinit var repositorySearchPresenter: RepositorySearchPresenter
 
+    private val adapter: RepositoryAdapter by lazy {
+        RepositoryAdapter(requireContext())
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -29,7 +38,7 @@ class SearchRepositoryFragment : BaseFragment() {
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
         repositorySearchPresenter.viewSearchRepositoryView = this
-
+        setUpRecyclerView(view)
         return view
     }
 
@@ -38,17 +47,19 @@ class SearchRepositoryFragment : BaseFragment() {
         repositorySearchPresenter.getRepositoryList()
     }
 
-    fun showSearchResult(repositoryList: RepositoryListEntity) {
-        // set repositories to recycler view adapter
-//        val adapter = RepositoryAdapter(requireContext(), repositoryList, onItemClickListener)
-//        rvRepositoryList.layoutManager = RepositoryLayoutManager(requireContext())
-//        rvRepositoryList.adapter = adapter
+    private fun setUpRecyclerView(view: View) {
+        adapter.setOnItemClickListener(onItemClickListener)
+        view.rvRepositoryList.layoutManager = RepositoryLayoutManager(requireContext())
+        view.rvRepositoryList.adapter = adapter
     }
 
-//    private val onItemClickListener = object : RepositoryAdapter.OnItemClickListener() {
-//        override fun onUserItemClicked(repositoryEntity: RepositoryEntity) {
-//            Timber.d("tappled")
-//        }
-//    }
+    fun showSearchResult(repositoryList: RepositoryListEntity) {
+        adapter.updateListItems(repositoryList)
+    }
 
+    private val onItemClickListener = object : RepositoryAdapter.OnItemClickListener {
+        override fun onUserItemClicked(repositoryEntity: RepositoryEntity) {
+            Timber.d("tappled")
+        }
+    }
 }

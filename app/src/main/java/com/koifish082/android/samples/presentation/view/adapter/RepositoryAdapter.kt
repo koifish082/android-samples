@@ -7,24 +7,21 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import com.koifish082.android.samples.R
 import com.koifish082.android.samples.presentation.viewModel.RepositoryEntity
 import com.koifish082.android.samples.presentation.viewModel.RepositoryListEntity
 import kotlinx.android.synthetic.main.row_repository.view.*
-import timber.log.Timber
 
-class RepositoryAdapter(
-        private val context: Context,
-        private val repositoryList: RepositoryListEntity,
-        private val onItemClickListener: OnItemClickListener
+class RepositoryAdapter (
+        private val context: Context
 ) : RecyclerView.Adapter<RepositoryAdapter.RepositoryViewHolder>() {
 
     interface OnItemClickListener {
         fun onUserItemClicked(repository: RepositoryEntity)
     }
 
-    //    private var usersCollection: List<Repository>? = null
+    private val repositoryList: RepositoryListEntity = RepositoryListEntity()
+    private lateinit var onItemClickListener: OnItemClickListener
     private val layoutInflater: LayoutInflater by lazy {
         context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
     }
@@ -37,8 +34,17 @@ class RepositoryAdapter(
     override fun getItemCount(): Int = repositoryList.repositoryList.size
 
     override fun onBindViewHolder(holder: RepositoryViewHolder, position: Int) {
-        holder.bind(getItem(position))
-//        holder.itemView.setOnClickListener(onItemClickListener)
+        val entity: RepositoryEntity = getItem(position)
+        holder.bind(entity)
+        holder.itemView.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View?) {
+                onItemClickListener.onUserItemClicked(entity)
+            }
+        })
+    }
+
+    fun setOnItemClickListener(onItemClickListener: OnItemClickListener) {
+        this.onItemClickListener = onItemClickListener
     }
 
     private fun getItem(position: Int): RepositoryEntity = repositoryList.repositoryList[position]
@@ -50,9 +56,9 @@ class RepositoryAdapter(
         }
     }
 
-    fun updateListItems(newItems: MutableList<RepositoryEntity>) {
+    fun updateListItems(newRepositoryList: RepositoryListEntity) {
         val items = repositoryList.repositoryList
-        val updatedItems = (items + newItems) as MutableList<RepositoryEntity>
+        val updatedItems = (items + newRepositoryList.repositoryList) as MutableList<RepositoryEntity>
         val diffCallback = RepositoryDiffCallback(items, updatedItems)
         val diffResult = DiffUtil.calculateDiff(diffCallback)
         repositoryList.repositoryList = updatedItems
