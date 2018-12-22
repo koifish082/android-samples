@@ -16,9 +16,6 @@ import javax.inject.Inject
 class RepositoryAdapter @Inject constructor(
         private val context: Context
 ) : RecyclerView.Adapter<RepositoryAdapter.RepositoryViewHolder>() {
-//class RepositoryAdapter(
-//        private val context: Context
-//) : RecyclerView.Adapter<RepositoryAdapter.RepositoryViewHolder>() {
 
     interface OnItemClickListener {
         fun onUserItemClicked(repository: RepositoryEntity)
@@ -81,7 +78,6 @@ class RepositoryAdapter @Inject constructor(
 
         @Nullable
         override fun getChangePayload(oldItemPosition: Int, newItemPosition: Int): Any? {
-            // Implement method if you're going to use ItemAnimator
             return super.getChangePayload(oldItemPosition, newItemPosition)
         }
     }
