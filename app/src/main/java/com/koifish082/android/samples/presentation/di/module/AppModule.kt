@@ -1,17 +1,12 @@
 package com.koifish082.android.samples.presentation.di.module
 
-import com.koifish082.android.samples.presentation.presenter.Impl.RepositorySearchPresenterImpl
-import com.koifish082.android.samples.presentation.presenter.RepositorySearchPresenter
+import android.app.Application
+import android.content.Context
+import dagger.Binds
 import dagger.Module
-import dagger.Provides
-import javax.inject.Singleton
 
 @Module
-class AppModule {
-
-    @Provides
-    fun provideRepositorySearchPresenter(): RepositorySearchPresenter {
-        return RepositorySearchPresenterImpl()
-    }
-
+abstract class AppModule {
+    @Binds
+    abstract fun bindContext(application: Application) : Context
 }

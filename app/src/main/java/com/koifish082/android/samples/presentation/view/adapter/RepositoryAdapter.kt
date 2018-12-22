@@ -11,10 +11,14 @@ import com.koifish082.android.samples.R
 import com.koifish082.android.samples.presentation.viewModel.RepositoryEntity
 import com.koifish082.android.samples.presentation.viewModel.RepositoryListEntity
 import kotlinx.android.synthetic.main.row_repository.view.*
+import javax.inject.Inject
 
-class RepositoryAdapter (
+class RepositoryAdapter @Inject constructor(
         private val context: Context
 ) : RecyclerView.Adapter<RepositoryAdapter.RepositoryViewHolder>() {
+//class RepositoryAdapter(
+//        private val context: Context
+//) : RecyclerView.Adapter<RepositoryAdapter.RepositoryViewHolder>() {
 
     interface OnItemClickListener {
         fun onUserItemClicked(repository: RepositoryEntity)
@@ -36,11 +40,7 @@ class RepositoryAdapter (
     override fun onBindViewHolder(holder: RepositoryViewHolder, position: Int) {
         val entity: RepositoryEntity = getItem(position)
         holder.bind(entity)
-        holder.itemView.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View?) {
-                onItemClickListener.onUserItemClicked(entity)
-            }
-        })
+        holder.itemView.setOnClickListener { onItemClickListener.onUserItemClicked(entity) }
     }
 
     fun setOnItemClickListener(onItemClickListener: OnItemClickListener) {
