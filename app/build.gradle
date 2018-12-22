@@ -7,11 +7,11 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
     defaultConfig {
-        applicationId "koifish082.android.sample.com.api.androidsamples"
+        applicationId "com.koifish082.android.samples"
         minSdkVersion 19
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -21,6 +21,40 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    signingConfigs {
+        prod {
+            storeFile file('../keystore/android_samples.keystore')
+            keyAlias "koifish082-android-samples-key"
+            storePassword "1234Abcd"
+            keyPassword "1234Abcd"
+        }
+        dev {
+            storeFile file('../keystore/android_samples.keystore')
+            keyAlias "koifish082-android-samples-key"
+            storePassword "1234Abcd"
+            keyPassword "1234Abcd"
+        }
+    }
+
+    flavorDimensions "tier"
+    productFlavors {
+        def encloseDoubleQuote = { str -> '"' + str + '"' }
+        prod {
+            applicationIdSuffix ".prod"
+            signingConfig signingConfigs.prod
+            buildConfigField "String", 'GITHUB_API_BASE_URL', encloseDoubleQuote("https://api.github.com/")
+        }
+        dev {
+            applicationIdSuffix ".dev"
+            signingConfig signingConfigs.dev
+            buildConfigField "String", 'GITHUB_API_BASE_URL', encloseDoubleQuote("https://api.github.com/")
         }
     }
 }
@@ -42,32 +76,43 @@ dependencies {
     testImplementation "junit:junit:$jUnitVersion"
     androidTestImplementation "com.android.support.test:runner:$testRunnerVersion"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$testEspressoCoreVersion"
+
     // HTTP
     implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttpInterceptorVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+
     // JSON
     implementation "com.google.code.gson:gson:$gsonVersion"
+
     // DI (Dagger2)
-    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
-    kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
     implementation "com.google.dagger:dagger:$daggerVersion"
+    implementation "com.google.dagger:dagger-android:$daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
     kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    kapt "com.google.dagger:dagger-android-processor:$daggerVersion"
     kaptTest "com.google.dagger:dagger-compiler:$daggerVersion"
+
     // RxJava
     implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
     implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
     implementation "io.reactivex.rxjava2:rxkotlin:$rxKotlinVersion"
+
     // Image Crop
     implementation "com.github.yalantis:ucrop:$ucropVersion"
+
     // Paper Parcel
     implementation "nz.bradcampbell:paperparcel:$paperParcelVersion"
-    implementation "nz.bradcampbell:paperparcel-kotlin:$paperParcelVersion" // Optional
+    implementation "nz.bradcampbell:paperparcel-kotlin:$paperParcelVersion"
+
+    // Optional
     kapt "nz.bradcampbell:paperparcel-compiler:$paperParcelVersion"
+
     // Image Downloading and cache library
     implementation "com.squareup.picasso:picasso:$picassoVersion"
+
     // Log
     implementation "com.jakewharton.timber:timber:$timberVersion"
 }
