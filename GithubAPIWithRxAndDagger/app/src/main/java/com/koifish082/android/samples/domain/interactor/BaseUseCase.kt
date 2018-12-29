@@ -4,8 +4,6 @@ import io.reactivex.disposables.CompositeDisposable
 
 abstract class BaseUseCase {
 
-    abstract fun execute()
-
     protected val disposables = CompositeDisposable()
 
 }
