@@ -1,6 +1,8 @@
 package com.koifish082.android.samples.presentation.viewModel
 
-class RepositorySearchViewModel {
+import javax.inject.Inject
+
+class RepositorySearchViewModel @Inject constructor() {
 
     var q: String = "google"
 

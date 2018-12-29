@@ -18,15 +18,11 @@ abstract class MainActivityModule {
     abstract fun bindsActivity(activity: BottomNavigationActivity): BottomNavigationActivity
 
     @FragmentScope
-    @ContributesAndroidInjector
+    @ContributesAndroidInjector(modules = [RepositorySearchModule::class])
     abstract fun contributeSearchRepositoryFragment(): SearchRepositoryFragment
 
-    @ActivityScope
+    @FragmentScope
     @Binds
     abstract fun bindsFragment(fragment: SearchRepositoryFragment): RepositorySearch.View
-
-    @ActivityScope
-    @Binds
-    abstract fun repositorySearchPresenter(presenter: RepositorySearchPresenterImpl): RepositorySearch.Presenter
 
 }

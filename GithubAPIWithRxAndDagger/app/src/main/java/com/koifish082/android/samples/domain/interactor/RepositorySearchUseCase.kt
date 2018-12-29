@@ -7,16 +7,16 @@ import com.koifish082.android.samples.data.entity.githubApi.request.RepositorySe
 import com.koifish082.android.samples.data.entity.githubApi.response.Repositories
 import com.koifish082.android.samples.data.repository.RepositorySearchApiRepositoryImpl
 import com.koifish082.android.samples.presentation.viewModel.RepositorySearchViewModel
+import javax.inject.Inject
 
-class RepositorySearchUseCase(
-        private val searchCondition: RepositorySearchViewModel,
-        private val observer: DisposableSingleObserver<Repositories>
-) : BaseUseCase() {
+class RepositorySearchUseCase @Inject constructor() : BaseUseCase() {
 
-    override fun execute() {
+    fun execute(
+            searchCondition: RepositorySearchViewModel,
+            observer: DisposableSingleObserver<Repositories>) {
         // bind form data to entity
         val repositorySearchRequest = RepositorySearchRequest()
-        mapSearchConditionToRequestEntity(repositorySearchRequest)
+        mapSearchConditionToRequestEntity(searchCondition, repositorySearchRequest)
         // single
         val single = RepositorySearchApiRepositoryImpl().getRepositories(repositorySearchRequest)
                 .subscribeOn(Schedulers.io())
@@ -24,7 +24,9 @@ class RepositorySearchUseCase(
         disposables.add(single.subscribeWith(observer))
     }
 
-    private fun mapSearchConditionToRequestEntity(repositorySearchRequest: RepositorySearchRequest) {
+    private fun mapSearchConditionToRequestEntity(
+            searchCondition: RepositorySearchViewModel,
+            repositorySearchRequest: RepositorySearchRequest) {
         repositorySearchRequest.q = searchCondition.q
         repositorySearchRequest.sort = searchCondition.sort
         repositorySearchRequest.order = searchCondition.order

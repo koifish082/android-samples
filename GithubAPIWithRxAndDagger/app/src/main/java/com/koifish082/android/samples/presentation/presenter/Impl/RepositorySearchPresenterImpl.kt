@@ -10,27 +10,23 @@ import com.koifish082.android.samples.presentation.viewModel.mapper.RepositoryEn
 import timber.log.Timber
 import javax.inject.Inject
 
-class RepositorySearchPresenterImpl @Inject constructor() : RepositorySearch.Presenter {
+class RepositorySearchPresenterImpl @Inject constructor(
+    private val searchCondition: RepositorySearchViewModel,
+    private val repositorySearchUseCase: RepositorySearchUseCase
+) : RepositorySearch.Presenter {
 
     override lateinit var viewSearchRepositoryView: SearchRepositoryFragment
-
-    private val searchCondition: RepositorySearchViewModel by lazy {
-        RepositorySearchViewModel()
-    }
-
-    private val repositorySearchUseCase: RepositorySearchUseCase by lazy {
-        RepositorySearchUseCase(searchCondition, GetRepositoriesObserver())
-    }
 
     private val repositoryEntityMapper: RepositoryEntityMapper by lazy {
         RepositoryEntityMapper()
     }
 
     override fun getRepositoryList() {
-        repositorySearchUseCase.execute()
+        repositorySearchUseCase.execute(searchCondition, GetRepositoriesObserver())
     }
 
-    private inner class GetRepositoriesObserver : DisposableSingleObserver<Repositories>() {
+    inner class GetRepositoriesObserver : DisposableSingleObserver<Repositories>() {
+
         override fun onSuccess(response: Repositories) {
             Timber.d("*************** onSuccess in rxjava observer")
             viewSearchRepositoryView.showSearchResult(repositoryEntityMapper.transform(response))
