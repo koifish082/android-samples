@@ -24,7 +24,6 @@ class SearchRepositoryFragment : BaseFragment(), RepositorySearch.View {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
-        setUpPresenter()
         setUpRecyclerView(view)
         repositorySearchPresenter.getRepositoryList()
         return view
@@ -33,10 +32,6 @@ class SearchRepositoryFragment : BaseFragment(), RepositorySearch.View {
     override fun onDestroy() {
         super.onDestroy()
         repositorySearchPresenter.destroy()
-    }
-
-    private fun setUpPresenter() {
-        repositorySearchPresenter.viewSearchRepositoryView = this
     }
 
     private fun setUpRecyclerView(view: View) {

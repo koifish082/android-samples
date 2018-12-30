@@ -4,8 +4,9 @@ import com.koifish082.android.samples.data.entity.githubApi.response.Repositorie
 import com.koifish082.android.samples.data.entity.githubApi.response.Repository
 import com.koifish082.android.samples.presentation.viewModel.RepositoryEntity
 import com.koifish082.android.samples.presentation.viewModel.RepositoryListEntity
+import javax.inject.Inject
 
-class RepositoryEntityMapper {
+class RepositoryEntityMapper @Inject constructor() {
     fun transform(response: Repositories) : RepositoryListEntity {
         val repositoryListEntity = RepositoryListEntity()
         repositoryListEntity.totalCount = response.totalCount
