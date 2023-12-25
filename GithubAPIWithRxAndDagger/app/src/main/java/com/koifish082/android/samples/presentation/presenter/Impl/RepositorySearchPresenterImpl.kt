@@ -11,29 +11,21 @@ import timber.log.Timber
 import javax.inject.Inject
 
 class RepositorySearchPresenterImpl @Inject constructor(
+    private val viewSearchRepositoryView : SearchRepositoryFragment,
     private val searchCondition: RepositorySearchViewModel,
-    private val repositorySearchUseCase: RepositorySearchUseCase
+    private val repositorySearchUseCase: RepositorySearchUseCase,
+    private val repositoryEntityMapper: RepositoryEntityMapper
 ) : RepositorySearch.Presenter {
-
-    override lateinit var viewSearchRepositoryView: SearchRepositoryFragment
-
-    private val repositoryEntityMapper: RepositoryEntityMapper by lazy {
-        RepositoryEntityMapper()
-    }
 
     override fun getRepositoryList() {
         repositorySearchUseCase.execute(searchCondition, GetRepositoriesObserver())
     }
 
     inner class GetRepositoriesObserver : DisposableSingleObserver<Repositories>() {
-
         override fun onSuccess(response: Repositories) {
-            Timber.d("*************** onSuccess in rxjava observer")
             viewSearchRepositoryView.showSearchResult(repositoryEntityMapper.transform(response))
         }
-
         override fun onError(e: Throwable) {
-            Timber.d("*************** onError in rxjava observer")
             Timber.d(e)
         }
     }
